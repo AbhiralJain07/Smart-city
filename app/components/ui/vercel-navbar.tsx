@@ -336,7 +336,7 @@ export function VercelNavbar() {
             <div className="w-8 h-8 bg-gradient-to-br from-neon-blue to-neon-cyan rounded-lg mr-2"></div>
             <span className="text-xl font-bold text-white">SmartCity AI</span>
           </div>
-          <NavigationMenu className="ml-8 hidden lg:flex" viewport={true}>
+          <NavigationMenu className="ml-8 hidden lg:flex" viewport={"true"}>
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger

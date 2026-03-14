@@ -51,7 +51,7 @@ export default function HeroSection({
 }: HeroSectionProps) {
   const [cityData, setCityData] = useState<SmartCityData | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
-  const [isMouseMoving, setIsMouseMoving] = useState(false);
+  const [, setIsMouseMoving] = useState(false);
 
   useEffect(() => {
     // Generate initial city data

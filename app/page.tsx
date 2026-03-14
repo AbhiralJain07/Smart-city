@@ -6,8 +6,6 @@ import HeroSection from "./components/sections/HeroSection";
 import { Navigation } from "./components/ui/Navigation";
 import Button from "./components/ui/Button";
 import { ContainerScroll } from "./components/ui/container-scroll-animation";
-import { ScrollAnimation } from "./components/ui/ScrollAnimation";
-import SimpleVisualization from "../../components/SimpleVisualization";
 import { StaggerTestimonials } from "./components/ui/stagger-testimonials";
 
 // Toast notification component
@@ -166,7 +164,7 @@ function FeaturesSection() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: "true", amount: 0.2 }}
           className="text-center mb-4"
         >
           <h2 className="text-4xl font-bold text-white mb-4">Powerful Features</h2>
@@ -231,7 +229,7 @@ function ImpactSection() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: "true", amount: 0.2 }}
           className="text-center mb-8"
         >
           <h2 className="text-4xl font-bold text-white mb-4">Proven Impact</h2>
@@ -279,7 +277,7 @@ function PricingSection() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: "true", amount: 0.2 }}
           className="text-center mb-8"
         >
           <h2 className="font-heading font-semibold text-4xl md:text-5xl uppercase tracking-widest mb-4"
@@ -297,7 +295,7 @@ function PricingSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
+            viewport={{ once: "true" }}
             whileHover={{ scale: 1.05, y: -10 }}
             className="glass rounded-2xl border border-white/10 p-8 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,217,255,0.3)] min-h-[500px] flex flex-col justify-between"
           >
@@ -335,7 +333,7 @@ function PricingSection() {
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
+            viewport={{ once: "true" }}
             whileHover={{ scale: 1.08, y: -15 }}
             className="glass rounded-2xl border-2 border-neon-blue/50 p-8 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_50px_rgba(0,217,255,0.6)] relative min-h-[520px] flex flex-col justify-between transform lg:scale-105 lg:origin-center"
           >
@@ -381,7 +379,7 @@ function PricingSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
+            viewport={{ once: "true" }}
             whileHover={{ scale: 1.05, y: -10 }}
             className="glass rounded-2xl border border-white/10 p-8 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,217,255,0.3)] min-h-[500px] flex flex-col justify-between"
           >
@@ -474,7 +472,7 @@ function TestimonialsSection() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: "true", amount: 0.2 }}
           className="text-center mb-8"
         >
           <h2 className="text-4xl font-bold text-white mb-4">What City Leaders Say</h2>
@@ -487,7 +485,7 @@ function TestimonialsSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: "true", amount: 0.2 }}
           className="flex justify-center items-center min-h-[600px] mt-4"
         >
           <StaggerTestimonials />
@@ -551,7 +549,7 @@ function ContactSection() {
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: "true", amount: 0.2 }}
       className="text-center mb-8"
     >
       <motion.h2
@@ -573,7 +571,7 @@ function ContactSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
+            viewport={{ once: "true" }}
             className="glass rounded-2xl border border-white/10 p-8 backdrop-blur-md"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -717,7 +715,7 @@ function TechnologySection() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: "true", amount: 0.2 }}
           className="text-center mb-8"
         >
           <h2 className="text-4xl font-bold text-white mb-4">Cutting-Edge Technology</h2>
