@@ -82,7 +82,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2026 SmartCity AI. All rights reserved.
+            © 2026 SmartCity AI. All rights reserved. Made with ❤️ by group 3 - EvolVIT Team. 😊
           </p>
         </div>
       </div>
