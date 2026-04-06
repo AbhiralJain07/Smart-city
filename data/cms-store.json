@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-06T09:30:00.000Z",
+  "updatedAt": "2026-04-06T19:57:47.248Z",
   "testimonials": [
     {
       "id": "testimonial_01",
@@ -81,7 +81,11 @@
       "title": "How Predictive Traffic Intelligence Cuts Downtown Congestion",
       "slug": "how-predictive-traffic-intelligence-cuts-downtown-congestion",
       "content": "Smart mobility teams need more than live maps. They need context about what is likely to happen next.\n\nOur latest deployments combine traffic camera feeds, sensor telemetry, and historical commute patterns to surface congestion risks before they cascade. With the right forecasting loop, operators can rebalance corridors, adjust signal timing, and alert citizens before a bottleneck forms.\n\nThe result is a calmer operational posture and a better commuter experience. Cities are moving from reacting to traffic incidents to orchestrating the flow of movement in real time.",
-      "tags": ["Traffic", "AI", "Mobility"],
+      "tags": [
+        "Traffic",
+        "AI",
+        "Mobility"
+      ],
       "coverImage": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&h=800&fit=crop",
       "status": "published",
       "publishedAt": "2026-04-02T09:00:00.000Z",
@@ -93,24 +97,16 @@
       "title": "Building a Unified Command Center for Utilities and Public Safety",
       "slug": "building-a-unified-command-center-for-utilities-and-public-safety",
       "content": "City platforms fail when each department sees a different version of reality.\n\nA unified command center changes that by translating complex infrastructure data into a shared operational picture. Utilities teams can see the service impact of incidents, while emergency teams can understand route, crowd, and environmental constraints without opening six different systems.\n\nWhen data is coordinated across departments, response quality improves and leaders can make decisions with confidence instead of approximation.",
-      "tags": ["Utilities", "Public Safety", "Operations"],
+      "tags": [
+        "Utilities",
+        "Public Safety",
+        "Operations"
+      ],
       "coverImage": "https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200&h=800&fit=crop",
       "status": "published",
       "publishedAt": "2026-03-25T08:30:00.000Z",
       "createdAt": "2026-03-24T16:00:00.000Z",
-      "updatedAt": "2026-03-25T08:30:00.000Z"
-    },
-    {
-      "id": "blog_03",
-      "title": "From Reactive Maintenance to AI-Led Infrastructure Planning",
-      "slug": "from-reactive-maintenance-to-ai-led-infrastructure-planning",
-      "content": "Reactive maintenance is expensive because it forces teams to work on the city's schedule instead of their own.\n\nBy tracking leading indicators across roads, utilities, lighting, and environmental systems, AI models can help planners understand which assets are drifting toward failure. That insight helps teams prioritize repairs, allocate crews, and communicate risk before residents feel the impact.\n\nThe best infrastructure planning workflows are not flashy. They are disciplined, explainable, and built to help human operators act earlier.",
-      "tags": ["Infrastructure", "Maintenance", "Planning"],
-      "coverImage": "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1200&h=800&fit=crop",
-      "status": "draft",
-      "publishedAt": null,
-      "createdAt": "2026-03-29T11:00:00.000Z",
-      "updatedAt": "2026-03-29T11:00:00.000Z"
+      "updatedAt": "2026-04-06T18:57:55.393Z"
     }
   ],
   "pricingPlans": [
@@ -170,6 +166,22 @@
       "position": 3,
       "createdAt": "2026-03-18T08:10:00.000Z",
       "updatedAt": "2026-03-18T08:10:00.000Z"
+    },
+    {
+      "id": "plan_8e1393b7-cd97-4c8c-8e70-9ae624d35947",
+      "name": "smart ai assistant",
+      "price": 199,
+      "billingCycle": "month",
+      "description": "hiii im a chat bot",
+      "features": [
+        "hii"
+      ],
+      "highlight": true,
+      "status": "active",
+      "ctaLabel": "Get Started",
+      "position": 1,
+      "createdAt": "2026-04-06T19:57:47.234Z",
+      "updatedAt": "2026-04-06T19:57:47.234Z"
     }
   ],
   "contactSubmissions": [

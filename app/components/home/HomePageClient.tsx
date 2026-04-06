@@ -1,19 +1,19 @@
-﻿"use client";
+'use client';
 
-import { useEffect, useEffectEvent, useState, startTransition, type FormEvent } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useEffectEvent, useState, startTransition, type FormEvent } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
-import type { PublicContentPayload } from "@/lib/cms/types";
-import { subscribeToCmsUpdates } from "@/lib/cms/realtime";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { Pricing } from "@/components/ui/single-pricing-card-1";
-import Testimonials from "@/components/ui/testimonials-demo";
+import type { PublicContentPayload } from '@/lib/cms/types';
+import { subscribeToCmsUpdates } from '@/lib/cms/realtime';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
+import { Pricing } from '@/components/ui/single-pricing-card-1';
+import Testimonials from '@/components/ui/testimonials-demo';
 
-import HeroSection from "../sections/HeroSection";
-import { ContainerScroll } from "../ui/container-scroll-animation";
-import Button from "../ui/Button";
-import BlogSection from "./BlogSection";
-import ContactSection from "./ContactSection";
+import HeroSection from '../sections/HeroSection';
+import { ContainerScroll } from '../ui/container-scroll-animation';
+import Button from '../ui/Button';
+import BlogSection from './BlogSection';
+import ContactSection from './ContactSection';
 
 function Toast({ message, isVisible }: { message: string; isVisible: boolean }) {
   return (
@@ -23,7 +23,7 @@ function Toast({ message, isVisible }: { message: string; isVisible: boolean }) 
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
-          className="fixed right-4 top-4 z-50 rounded-lg bg-neon-blue px-6 py-3 text-black shadow-lg shadow-neon-blue/50"
+          className="bg-neon-blue shadow-neon-blue/50 fixed top-4 right-4 z-50 rounded-lg px-6 py-3 text-black shadow-lg"
         >
           <div className="flex items-center gap-2">
             <div className="h-4 w-4 animate-spin rounded-full border-2 border-black border-t-transparent"></div>
@@ -36,12 +36,12 @@ function Toast({ message, isVisible }: { message: string; isVisible: boolean }) 
 }
 
 function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const [formData, setFormData] = useState({ name: "", email: "", city: "" });
+  const [formData, setFormData] = useState({ name: '', email: '', city: '' });
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onClose();
-    setFormData({ name: "", email: "", city: "" });
+    setFormData({ name: '', email: '', city: '' });
   };
 
   return (
@@ -59,7 +59,7 @@ function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.82, opacity: 0 }}
             className="glass mx-4 w-full max-w-md rounded-2xl border border-white/20 p-8"
-            onClick={(event) => event.stopPropagation()}
+            onClick={event => event.stopPropagation()}
           >
             <div className="mb-6 flex items-center justify-between">
               <h2 className="text-2xl font-bold text-white">Schedule Demo</h2>
@@ -68,7 +68,12 @@ function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
                 className="text-gray-400 transition-colors hover:text-white"
               >
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
@@ -80,10 +85,10 @@ function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
                   type="text"
                   required
                   value={formData.name}
-                  onChange={(event) =>
-                    setFormData((current) => ({ ...current, name: event.target.value }))
+                  onChange={event =>
+                    setFormData(current => ({ ...current, name: event.target.value }))
                   }
-                  className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neon-blue/50"
+                  className="focus:ring-neon-blue/50 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:outline-none"
                   placeholder="John Doe"
                 />
               </div>
@@ -94,10 +99,10 @@ function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
                   type="email"
                   required
                   value={formData.email}
-                  onChange={(event) =>
-                    setFormData((current) => ({ ...current, email: event.target.value }))
+                  onChange={event =>
+                    setFormData(current => ({ ...current, email: event.target.value }))
                   }
-                  className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neon-blue/50"
+                  className="focus:ring-neon-blue/50 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:outline-none"
                   placeholder="john@example.com"
                 />
               </div>
@@ -108,10 +113,10 @@ function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
                   type="text"
                   required
                   value={formData.city}
-                  onChange={(event) =>
-                    setFormData((current) => ({ ...current, city: event.target.value }))
+                  onChange={event =>
+                    setFormData(current => ({ ...current, city: event.target.value }))
                   }
-                  className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neon-blue/50"
+                  className="focus:ring-neon-blue/50 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:outline-none"
                   placeholder="New York, USA"
                 />
               </div>
@@ -130,56 +135,56 @@ function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
 function FeaturesSection() {
   const features = [
     {
-      icon: "City",
-      title: "Real-time Monitoring",
+      icon: 'City',
+      title: 'Real-time Monitoring',
       description:
-        "Track city metrics and infrastructure performance with live data streams and AI-powered analytics.",
-      color: "text-neon-blue",
+        'Track city metrics and infrastructure performance with live data streams and AI-powered analytics.',
+      color: 'text-neon-blue',
     },
     {
-      icon: "AI",
-      title: "AI-Powered Insights",
+      icon: 'AI',
+      title: 'AI-Powered Insights',
       description:
-        "Leverage machine learning models to forecast demand, predict disruption, and improve city-wide decision making.",
-      color: "text-neon-green",
+        'Leverage machine learning models to forecast demand, predict disruption, and improve city-wide decision making.',
+      color: 'text-neon-green',
     },
     {
-      icon: "Data",
-      title: "Predictive Analytics",
+      icon: 'Data',
+      title: 'Predictive Analytics',
       description:
-        "Surface early warning signals across traffic, utilities, safety, and sustainability before incidents escalate.",
-      color: "text-neon-purple",
+        'Surface early warning signals across traffic, utilities, safety, and sustainability before incidents escalate.',
+      color: 'text-neon-purple',
     },
     {
-      icon: "Secure",
-      title: "Smart Integration",
+      icon: 'Secure',
+      title: 'Smart Integration',
       description:
-        "Connect legacy systems, modern APIs, and IoT telemetry into one coordinated operating layer.",
-      color: "text-pink-400",
+        'Connect legacy systems, modern APIs, and IoT telemetry into one coordinated operating layer.',
+      color: 'text-pink-400',
     },
     {
-      icon: "Shield",
-      title: "Advanced Security",
+      icon: 'Shield',
+      title: 'Advanced Security',
       description:
-        "Protect mission-critical infrastructure with role-based access, audit visibility, and resilient workflows.",
-      color: "text-amber-300",
+        'Protect mission-critical infrastructure with role-based access, audit visibility, and resilient workflows.',
+      color: 'text-amber-300',
     },
     {
-      icon: "Scale",
-      title: "Operational Scale",
+      icon: 'Scale',
+      title: 'Operational Scale',
       description:
-        "Handle millions of city events in one place without sacrificing response speed or team clarity.",
-      color: "text-neon-blue",
+        'Handle millions of city events in one place without sacrificing response speed or team clarity.',
+      color: 'text-neon-blue',
     },
   ];
 
   return (
-    <section id="features" className="scroll-mt-20 bg-background-primary pb-16 pt-24">
+    <section id="features" className="bg-background-primary scroll-mt-20 pt-24 pb-16">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0.2 }}
           className="mb-4 text-center"
         >
@@ -187,7 +192,8 @@ function FeaturesSection() {
             Powerful Features
           </h2>
           <p className="mx-auto max-w-3xl px-4 text-base text-gray-300 sm:text-lg md:text-xl">
-            Operational intelligence, predictive automation, and infrastructure visibility built for modern cities.
+            Operational intelligence, predictive automation, and infrastructure visibility built for
+            modern cities.
           </p>
         </motion.div>
 
@@ -199,7 +205,8 @@ function FeaturesSection() {
                 <span className="text-neon-blue">Smart City Platform</span>
               </h2>
               <p className="mx-auto mt-4 max-w-3xl px-4 text-base text-gray-300 sm:text-lg md:text-xl">
-                Scroll through the product surface and see how the command center coordinates every layer of urban operations.
+                Scroll through the product surface and see how the command center coordinates every
+                layer of urban operations.
               </p>
             </>
           }
@@ -211,10 +218,12 @@ function FeaturesSection() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.08 }}
-                className="glass group rounded-2xl border border-white/10 p-5 transition-all duration-300 hover:border-neon-blue/30 sm:p-6 lg:p-8"
+                className="glass group hover:border-neon-blue/30 rounded-2xl border border-white/10 p-5 transition-all duration-300 sm:p-6 lg:p-8"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div className={`mb-3 text-sm font-semibold uppercase tracking-[0.35em] ${feature.color}`}>
+                <div
+                  className={`mb-3 text-sm font-semibold tracking-[0.35em] uppercase ${feature.color}`}
+                >
                   {feature.icon}
                 </div>
                 <h3 className="mb-3 text-lg font-bold text-white sm:text-xl">{feature.title}</h3>
@@ -232,23 +241,25 @@ function FeaturesSection() {
 
 function ImpactSection() {
   const metrics = [
-    { value: "35%", label: "Traffic Reduction", color: "text-neon-blue" },
-    { value: "25%", label: "Air Quality Improvement", color: "text-neon-green" },
-    { value: "$2M+", label: "Annual Savings", color: "text-neon-purple" },
-    { value: "50+", label: "Cities Served", color: "text-pink-400" },
+    { value: '35%', label: 'Traffic Reduction', color: 'text-neon-blue' },
+    { value: '25%', label: 'Air Quality Improvement', color: 'text-neon-green' },
+    { value: '$2M+', label: 'Annual Savings', color: 'text-neon-purple' },
+    { value: '50+', label: 'Cities Served', color: 'text-pink-400' },
   ];
 
   return (
-    <section id="impact" className="scroll-mt-20 bg-background-secondary py-24">
+    <section id="impact" className="bg-background-secondary scroll-mt-20 py-24">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0.2 }}
           className="mb-8 text-center"
         >
-          <h2 className="mb-4 text-2xl font-bold text-white sm:text-3xl md:text-4xl">Proven Impact</h2>
+          <h2 className="mb-4 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+            Proven Impact
+          </h2>
           <p className="mx-auto max-w-3xl px-4 text-base text-gray-300 sm:text-lg md:text-xl">
             Real operational gains from cities already deploying SmartCity AI in live environments.
           </p>
@@ -276,34 +287,38 @@ function ImpactSection() {
 function TechnologySection() {
   const technologies = [
     {
-      title: "AI-Powered Analytics",
-      description: "Machine learning models analyze live city data and surface operator-ready insights.",
-      icon: "Neural",
+      title: 'AI-Powered Analytics',
+      description:
+        'Machine learning models analyze live city data and surface operator-ready insights.',
+      icon: 'Neural',
     },
     {
-      title: "IoT Integration",
-      description: "Connect thousands of sensors, signals, and public systems without rebuilding your stack.",
-      icon: "Sensors",
+      title: 'IoT Integration',
+      description:
+        'Connect thousands of sensors, signals, and public systems without rebuilding your stack.',
+      icon: 'Sensors',
     },
     {
-      title: "Cloud Infrastructure",
-      description: "Scale dashboards, automation, and workflows across departments with resilient performance.",
-      icon: "Cloud",
+      title: 'Cloud Infrastructure',
+      description:
+        'Scale dashboards, automation, and workflows across departments with resilient performance.',
+      icon: 'Cloud',
     },
     {
-      title: "Governed Automation",
-      description: "Coordinate approvals, escalation paths, and response rules across complex public teams.",
-      icon: "Control",
+      title: 'Governed Automation',
+      description:
+        'Coordinate approvals, escalation paths, and response rules across complex public teams.',
+      icon: 'Control',
     },
   ];
 
   return (
-    <section id="technology" className="scroll-mt-20 bg-background-secondary py-24">
+    <section id="technology" className="bg-background-secondary scroll-mt-20 py-24">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0.2 }}
           className="mb-8 text-center"
         >
@@ -311,7 +326,8 @@ function TechnologySection() {
             Cutting-Edge Technology
           </h2>
           <p className="mx-auto max-w-3xl px-4 text-base text-gray-300 sm:text-lg md:text-xl">
-            Built with modern infrastructure patterns for reliability, speed, and city-scale coordination.
+            Built with modern infrastructure patterns for reliability, speed, and city-scale
+            coordination.
           </p>
         </motion.div>
 
@@ -324,7 +340,7 @@ function TechnologySection() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="relative"
             >
-              <div className="relative h-full rounded-2xl border border-white/10 p-4 transition-all duration-300 hover:border-neon-blue/30 sm:p-6 md:p-8">
+              <div className="hover:border-neon-blue/30 relative h-full rounded-2xl border border-white/10 p-4 transition-all duration-300 sm:p-6 md:p-8">
                 <GlowingEffect
                   spread={30}
                   glow={true}
@@ -334,11 +350,13 @@ function TechnologySection() {
                   borderWidth={2}
                 />
                 <div className="relative z-10">
-                  <div className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-neon-blue sm:mb-4">
+                  <div className="text-neon-blue mb-3 text-sm font-semibold tracking-[0.35em] uppercase sm:mb-4">
                     {tech.icon}
                   </div>
                   <h3 className="mb-2 text-lg font-bold text-white sm:text-xl">{tech.title}</h3>
-                  <p className="text-sm leading-relaxed text-gray-300 sm:text-base">{tech.description}</p>
+                  <p className="text-sm leading-relaxed text-gray-300 sm:text-base">
+                    {tech.description}
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -361,8 +379,8 @@ export default function HomePageClient({ initialContent }: HomePageClientProps) 
 
   const syncContent = useEffectEvent(async () => {
     try {
-      const response = await fetch("/api/content", {
-        cache: "no-store",
+      const response = await fetch('/api/content', {
+        cache: 'no-store',
       });
 
       if (!response.ok) {
@@ -371,8 +389,8 @@ export default function HomePageClient({ initialContent }: HomePageClientProps) 
 
       const nextContent = (await response.json()) as PublicContentPayload;
       startTransition(() => {
-        setContent((currentContent) =>
-          currentContent.updatedAt === nextContent.updatedAt ? currentContent : nextContent,
+        setContent(currentContent =>
+          currentContent.updatedAt === nextContent.updatedAt ? currentContent : nextContent
         );
       });
     } catch {
@@ -395,16 +413,16 @@ export default function HomePageClient({ initialContent }: HomePageClientProps) 
       void syncContent();
     }, 4000);
 
-    window.addEventListener("openDemoModal", handleOpenModal);
-    window.addEventListener("showDashboardToast", handleShowToast);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('openDemoModal', handleOpenModal);
+    window.addEventListener('showDashboardToast', handleShowToast);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       unsubscribe();
       window.clearInterval(interval);
-      window.removeEventListener("openDemoModal", handleOpenModal);
-      window.removeEventListener("showDashboardToast", handleShowToast);
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('openDemoModal', handleOpenModal);
+      window.removeEventListener('showDashboardToast', handleShowToast);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -420,16 +438,17 @@ export default function HomePageClient({ initialContent }: HomePageClientProps) 
     return () => window.clearTimeout(timeout);
   }, [showToast]);
 
-  const testimonialCards = content.testimonials.map((testimonial) => ({
+  const testimonialCards = content.testimonials.map(testimonial => ({
     text: testimonial.content,
     image: testimonial.image,
     name: testimonial.name,
     role: testimonial.role,
     rating: testimonial.rating,
   }));
+  const hasTestimonials = testimonialCards.length > 0;
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
 
   return (
@@ -441,35 +460,44 @@ export default function HomePageClient({ initialContent }: HomePageClientProps) 
       <BlogSection blogs={content.blogs} />
       <Pricing plans={content.pricingPlans} />
 
-      <section id="testimonials" className="scroll-mt-20 bg-background-primary pb-24 pt-16 sm:pt-20">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.2 }}
-            className="mt-4 flex min-h-[600px] items-center justify-center"
-          >
-            <Testimonials testimonials={testimonialCards} />
-          </motion.div>
-        </div>
-      </section>
-
+      {hasTestimonials ? (
+        <section
+          id="testimonials"
+          className="bg-background-primary scroll-mt-20 pt-16 pb-24 sm:pt-20"
+        >
+          <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              viewport={{ once: true, amount: 0.2 }}
+              className="mt-4 flex min-h-[600px] items-center justify-center"
+            >
+              <Testimonials testimonials={testimonialCards} />
+            </motion.div>
+          </div>
+        </section>
+      ) : null}
       <ContactSection />
 
       <motion.button
         onClick={scrollToTop}
-        className={`fixed bottom-4 right-4 z-50 rounded-full bg-neon-blue p-3 text-black shadow-lg transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_20px_rgba(0,217,255,0.5)] sm:bottom-8 sm:right-8 sm:p-4 ${
+        className={`bg-neon-blue fixed right-4 bottom-4 z-50 rounded-full p-3 text-black shadow-lg transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_20px_rgba(0,217,255,0.5)] sm:right-8 sm:bottom-8 sm:p-4 ${
           showBackToTop
-            ? "translate-y-0 opacity-100"
-            : "pointer-events-none translate-y-10 opacity-0"
+            ? 'translate-y-0 opacity-100'
+            : 'pointer-events-none translate-y-10 opacity-0'
         }`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         aria-label="Back to top"
       >
         <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 10l7-7m0 0l7 7m-7-7v18"
+          />
         </svg>
       </motion.button>
 
@@ -478,4 +506,3 @@ export default function HomePageClient({ initialContent }: HomePageClientProps) 
     </>
   );
 }
-
