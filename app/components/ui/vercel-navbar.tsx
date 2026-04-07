@@ -1,20 +1,17 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import Link from "next/link";
-import type { ReactElement } from "react";
-import { useTheme } from "next-themes";
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { useTheme } from 'next-themes';
+import { startTransition, useCallback, useEffect, useRef, useState } from 'react';
+import { LayoutDashboard, LogOut, Menu, Moon, Newspaper, Shield, Sun, X } from 'lucide-react';
 
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "./navigation-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import type { AdminSession } from '@/lib/cms/types';
+import { cn } from '@/lib/utils';
+
+import AdminQuickLoginPanel from '../admin/AdminQuickLoginPanel';
+import { Avatar, AvatarFallback } from './avatar';
+import { Button } from './shadcn-button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,668 +19,326 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./dropdown-menu";
-import { cn } from "@/lib/utils";
-import {
-  Bot,
-  Box,
-  Calendar,
-  TrendingUp,
-  Cpu,
-  ArrowUp,
-  Globe,
-  Grid3x3,
-  PenTool,
-  ScanText,
-  Shield,
-  Smile,
-  Sparkles,
-  BookText,
-  Briefcase,
-  Code,
-  Component,
-  Network,
-  Monitor,
-  Moon,
-  Sun,
-  Plus,
-  LogOut,
-} from "lucide-react";
-import { Button } from "./shadcn-button";
-import TextRoll from "./text-roll";
-import { useState, useCallback, useEffect } from "react";
+} from './dropdown-menu';
 
-const cloud: {
-  title: string;
-  icon: ReactElement;
-  href: string;
-  description: string;
-}[] = [
-  {
-    title: "AI SDK",
-    href: "#",
-    icon: <Box strokeWidth={2} />,
-    description: "The AI Toolkit for Typescript",
-  },
-  {
-    title: "AI Gateway",
-    href: "#",
-    icon: <Sparkles strokeWidth={2} />,
-    description: "One endpoint, all your models",
-  },
-  {
-    title: "SmartCity Agent",
-    href: "#",
-    icon: <ArrowUp strokeWidth={2} />,
-    description: "An agent that knows your city",
-  },
+const navItems = [
+  { label: 'Features', href: '#features' },
+  { label: 'Impact', href: '#impact' },
+  { label: 'Technology', href: '#technology' },
+  { label: 'Blogs', href: '/blogs' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Testimonials', href: '#testimonials' },
+  { label: 'Contact', href: '#contact' },
 ];
-
-const core: {
-  title: string;
-  icon: ReactElement;
-  href: string;
-  description: string;
-}[] = [
-  {
-    title: "CI/CD",
-    href: "#",
-    icon: <Grid3x3 strokeWidth={2} />,
-    description: "Helping teams ship 6× faster",
-  },
-  {
-    title: "Content Delivery",
-    href: "#",
-    icon: <Globe strokeWidth={2} />,
-    description: "Fast, scalable, and reliable",
-  },
-  {
-    title: "Fluid Compute",
-    href: "#",
-    icon: <Cpu strokeWidth={2} />,
-    description: "Servers, in serverless form",
-  },
-  {
-    title: "Observability",
-    href: "#",
-    icon: <TrendingUp strokeWidth={2} />,
-    description: "Trace every step",
-  },
-];
-
-const security: {
-  title: string;
-  icon: ReactElement;
-  href: string;
-  description: string;
-}[] = [
-  {
-    title: "Bot Management",
-    href: "#",
-    icon: <Bot strokeWidth={2} />,
-    description: "Scalable bot protection",
-  },
-  {
-    title: "CityID",
-    href: "#",
-    icon: <ScanText strokeWidth={2} />,
-    description: "Invisible security system",
-  },
-  {
-    title: "Platform Security",
-    href: "#",
-    icon: <Shield strokeWidth={2} />,
-    description: "DDOS Protection, Firewall",
-  },
-  {
-    title: "Web Application Firewall",
-    href: "#",
-    icon: <Calendar strokeWidth={2} />,
-    description: "Granular, custom protection",
-  },
-];
-
-const company: {
-  title: string;
-  icon: ReactElement;
-  href: string;
-  description: string;
-}[] = [
-  {
-    title: "Customers",
-    href: "#",
-    icon: <Smile strokeWidth={2} />,
-    description: "Trusted by the best cities",
-  },
-  {
-    title: "Blog",
-    href: "#",
-    icon: <PenTool strokeWidth={2} />,
-    description: "The latest posts and changes",
-  },
-  {
-    title: "Changelog",
-    href: "#",
-    icon: <BookText strokeWidth={2} />,
-    description: "See what shipped",
-  },
-  {
-    title: "Press",
-    href: "#",
-    icon: <Briefcase strokeWidth={2} />,
-    description: "Read the latest news",
-  },
-  {
-    title: "Events",
-    href: "#",
-    icon: <Calendar strokeWidth={2} />,
-    description: "Join us at an event",
-  },
-];
-
-const open: {
-  title: string;
-  icon: ReactElement;
-  href: string;
-  description: string;
-}[] = [
-  {
-    title: "Next.js",
-    href: "#",
-    icon: <Code strokeWidth={2} />,
-    description: "The native Next.js platform",
-  },
-  {
-    title: "SmartCity Framework",
-    href: "#",
-    icon: <Component strokeWidth={2} />,
-    description: "The progressive city framework",
-  },
-  {
-    title: "City Components",
-    href: "#",
-    icon: <Grid3x3 strokeWidth={2} />,
-    description: "The web's efficient UI framework",
-  },
-  {
-    title: "Turborepo",
-    href: "#",
-    icon: <Network strokeWidth={2} />,
-    description: "Speed with Enterprise scale",
-  },
-];
-
-const tools: {
-  title: string;
-  icon: ReactElement;
-  href: string;
-  description: string;
-}[] = [
-  {
-    title: "Academy",
-    href: "#",
-    icon: <Code strokeWidth={2} />,
-    description: "Learn the ins and outs of SmartCity",
-  },
-  {
-    title: "Marketplace",
-    href: "#",
-    icon: <Component strokeWidth={2} />,
-    description: "Extend and automate workflows",
-  },
-  {
-    title: "Templates",
-    href: "#",
-    icon: <Grid3x3 strokeWidth={2} />,
-    description: "Jumpstart city development",
-  },
-  {
-    title: "Guides",
-    href: "#",
-    icon: <Network strokeWidth={2} />,
-    description: "Find help quickly",
-  },
-  {
-    title: "Partner Finder",
-    href: "#",
-    icon: <Network strokeWidth={2} />,
-    description: "Get help from solution partners",
-  },
-];
-
-const cases: {
-  title: string;
-  icon: ReactElement;
-  href: string;
-  description: string;
-}[] = [
-  {
-    title: "AI Apps",
-    href: "#",
-    icon: <Sparkles strokeWidth={2} />,
-    description: "Deploy at the speed of AI",
-  },
-  {
-    title: "Smart City Management",
-    href: "#",
-    icon: <Component strokeWidth={2} />,
-    description: "Power city systems that convert",
-  },
-  {
-    title: "Marketing Sites",
-    href: "#",
-    icon: <Monitor strokeWidth={2} />,
-    description: "Jumpstart app development",
-  },
-  {
-    title: "Multi-tenant Platforms",
-    href: "#",
-    icon: <Network strokeWidth={2} />,
-    description: "Scale apps with one codebase",
-  },
-  {
-    title: "Web Apps",
-    href: "#",
-    icon: <Monitor strokeWidth={2} />,
-    description: "Ship features, not infrastructure",
-  },
-];
-
-const users: {
-  title: string;
-  icon: ReactElement;
-  href: string;
-  description: string;
-}[] = [
-  {
-    title: "Platform Engineers",
-    href: "#",
-    icon: <Code strokeWidth={2} />,
-    description: "Automate away repetition",
-  },
-  {
-    title: "Design Engineers",
-    href: "#",
-    icon: <Grid3x3 strokeWidth={2} />,
-    description: "Deploy for every idea",
-  },
-];
-
-export function VercelNavbar() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <div
-      className={`flex sticky px-4 z-50 top-0 w-full bg-background items-center h-16 justify-between transition-border duration-300 ${
-        scrolled ? "border-b" : "border-b-0"
-      }`}
-    >
-      <div className="flex items-center justify-between w-full mx-auto max-w-7xl">
-        <div className="flex h-14 justify-center">
-          <div className="flex items-center">
-            <div className="w-8 h-8 bg-gradient-to-br from-neon-blue to-neon-cyan rounded-lg mr-2"></div>
-            <span className="text-xl font-bold text-white">SmartCity AI</span>
-          </div>
-          <NavigationMenu className="ml-8 hidden lg:flex">
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "rounded-full h-7.5 font-normal text-muted-foreground"
-                  )}
-                >
-                  <TextRoll className="text-sm">Products</TextRoll>
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-background">
-                  <ul className="grid w-[400px] pt-2 grid-cols-3 md:w-[800px]">
-                    <div>
-                      <span className="p-4 text-muted-foreground">AI Cloud</span>
-                      {cloud.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          icon={component.icon}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
-                      ))}
-                    </div>
-                    <div>
-                      <span className="p-4 text-muted-foreground">Core Platform</span>
-                      {core.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          icon={component.icon}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
-                      ))}
-                    </div>
-                    <div>
-                      <span className="p-4 text-muted-foreground">Security</span>
-                      {security.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          icon={component.icon}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
-                      ))}
-                    </div>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "rounded-full h-7.5 font-normal text-muted-foreground"
-                  )}
-                >
-                  <TextRoll className="text-sm">Resources</TextRoll>
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-background">
-                  <ul className="grid w-[400px] pt-2 grid-cols-3 md:w-[800px]">
-                    <div>
-                      <span className="p-4 text-muted-foreground">Company</span>
-                      {company.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          icon={component.icon}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
-                      ))}
-                    </div>
-                    <div>
-                      <span className="p-4 text-muted-foreground">Open Source</span>
-                      {open.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          icon={component.icon}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
-                      ))}
-                    </div>
-                    <div>
-                      <span className="p-4 text-muted-foreground">Tools</span>
-                      {tools.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          icon={component.icon}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
-                      ))}
-                    </div>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "rounded-full h-7.5 font-normal text-muted-foreground"
-                  )}
-                >
-                  <TextRoll className="text-sm">Solutions</TextRoll>
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-background">
-                  <ul className="grid w-[400px] pt-2 grid-cols-2 md:w-[550px]">
-                    <div>
-                      <span className="p-4 text-muted-foreground">Use Cases</span>
-                      {cases.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          icon={component.icon}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
-                      ))}
-                    </div>
-                    <div>
-                      <span className="p-4 text-muted-foreground">Users</span>
-                      {users.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          icon={component.icon}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
-                      ))}
-                    </div>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  asChild
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "rounded-full h-7.5 font-normal text-muted-foreground"
-                  )}
-                >
-                  <Link href="#pricing"><TextRoll className="text-sm">Pricing</TextRoll></Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  asChild
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "rounded-full h-7.5 font-normal text-muted-foreground"
-                  )}
-                >
-                  <Link href="#contact"><TextRoll className="text-sm">Contact</TextRoll></Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-        </div>
-        <div className="flex gap-2">
-          <Button variant={"outline"} size={"sm"}>
-            Contact
-          </Button>
-          <Button variant={"outline"} size={"sm"}>
-            Dashboard
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Avatar className="border">
-                <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="User" />
-                <AvatarFallback>SC</AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-70 p-3 rounded-xl" align="end">
-              <div className="p-2">
-                <h1 className="font-semibold">Smart City Admin</h1>
-                <p className="text-sm text-muted-foreground">
-                  admin@smartcity.ai
-                </p>
-              </div>
-              <DropdownMenuGroup>
-                <DropdownMenuItem className="py-3">Dashboard</DropdownMenuItem>
-                <DropdownMenuItem className="py-3">
-                  Account Settings
-                </DropdownMenuItem>
-                <DropdownMenuItem className="py-3 justify-between">
-                  Create Teams <Plus strokeWidth={2} />
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator className="-mx-3" />
-              <DropdownMenuGroup>
-                <DropdownMenuItem className="py-3 justify-between">
-                  Theme <ThemeSwitcher />
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator className="-mx-3" />
-
-              <DropdownMenuItem className="py-3 justify-between">
-                Logout <LogOut strokeWidth={2} />
-              </DropdownMenuItem>
-              <DropdownMenuSeparator className="-mx-3" />
-              <DropdownMenuItem className="pt-3">
-                <Button className="w-full">Upgrade to Pro</Button>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ListItem({
-  title,
-  icon,
-  children,
-  href,
-  ...props
-}: React.ComponentPropsWithoutRef<"li"> & {
-  href: string;
-  icon: ReactElement;
-}) {
-  return (
-    <li {...props}>
-      <NavigationMenuLink asChild className="hover:bg-transparent">
-        <Link href={href}>
-          <div className="flex gap-3 items-start rounded-md p-2">
-            <div className="border rounded-sm p-2 icon-container">{icon}</div>
-            <div className="text-container">
-              <div className="text-sm font-medium leading-none">{title}</div>
-              <p className="text-muted-foreground line-clamp-2 pt-1 text-xs leading-snug">
-                {children}
-              </p>
-            </div>
-          </div>
-        </Link>
-      </NavigationMenuLink>
-
-      <style jsx>{`
-        li:hover .icon-container {
-          background-color: var(--foreground);
-          color: var(--background);
-          transform: scale(1.05);
-          transition: all 0.2s ease;
-        }
-
-        li:hover .text-container .text-sm {
-          color: var(--foreground);
-          transition: color 0.2s ease;
-        }
-
-        li:hover .text-container p {
-          color: var(--foreground);
-          transition: color 0.2s ease;
-        }
-      `}</style>
-    </li>
-  );
-}
 
 const themes = [
-  {
-    key: "system",
-    icon: Monitor,
-    label: "System theme",
-  },
-  {
-    key: "light",
-    icon: Sun,
-    label: "Light theme",
-  },
-  {
-    key: "dark",
-    icon: Moon,
-    label: "Dark theme",
-  },
-];
+  { key: 'system', icon: LayoutDashboard, label: 'System' },
+  { key: 'light', icon: Sun, label: 'Light' },
+  { key: 'dark', icon: Moon, label: 'Dark' },
+] as const;
 
-export type ThemeSwitcherProps = {
-  value?: "light" | "dark" | "system";
-  onChange?: (theme: "light" | "dark" | "system") => void;
-  defaultValue?: "light" | "dark" | "system";
-  className?: string;
-};
+function resolveHref(pathname: string, href: string) {
+  if (!href.startsWith('#')) {
+    return href;
+  }
 
-const ThemeSwitcher = ({ 
-  className,
-}: ThemeSwitcherProps) => {
-  const { theme, setTheme } = useTheme();
+  return pathname === '/' ? href : `/${href}`;
+}
+
+export function VercelNavbar({ session }: { session: AdminSession | null }) {
+  const pathname = usePathname();
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [adminPanelOpen, setAdminPanelOpen] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const desktopAdminPanelRef = useRef<HTMLDivElement | null>(null);
+  const mobileAdminPanelRef = useRef<HTMLDivElement | null>(null);
 
-  const handleThemeClick = useCallback(
-    (themeKey: "light" | "dark" | "system") => {
-      setTheme(themeKey);
-    },
-    [setTheme]
-  );
-
-  // Prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
+  useEffect(() => {
+    setAdminPanelOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!adminPanelOpen) {
+      return;
+    }
+
+    const handlePointerDown = (event: MouseEvent) => {
+      const target = event.target as Node;
+      const clickedDesktop = desktopAdminPanelRef.current?.contains(target) ?? false;
+      const clickedMobile = mobileAdminPanelRef.current?.contains(target) ?? false;
+
+      if (!clickedDesktop && !clickedMobile) {
+        setAdminPanelOpen(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setAdminPanelOpen(false);
+      }
+    };
+
+    window.addEventListener('mousedown', handlePointerDown);
+    window.addEventListener('keydown', handleEscape);
+
+    return () => {
+      window.removeEventListener('mousedown', handlePointerDown);
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, [adminPanelOpen]);
+
+  const handleLogout = useCallback(async () => {
+    setLoggingOut(true);
+
+    try {
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+      });
+    } finally {
+      startTransition(() => {
+        router.push('/');
+        router.refresh();
+      });
+      setLoggingOut(false);
+    }
+  }, [router]);
 
   return (
-    <div
-      className={cn(
-        "relative isolate flex h-7 rounded-full bg-background p-1 ring-1 ring-border",
-        className
-      )}
-    >
-      {themes.map(({ key, icon: Icon, label }) => {
-        const isActive = theme === key;
+    <header className="bg-background/90 sticky top-0 z-50 border-b border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.16)] backdrop-blur-xl">
+      <div className="mx-auto flex h-18 w-full max-w-7xl items-center justify-between px-4 sm:px-6">
+        <Link href="/" className="flex items-center gap-3">
+          <div className="from-neon-blue h-10 w-10 rounded-2xl bg-gradient-to-br to-cyan-400 shadow-[0_0_24px_rgba(0,217,255,0.35)]"></div>
+          <div>
+            <div className="text-base font-semibold text-white sm:text-lg">SmartCity AI</div>
+            <div className="hidden text-xs tracking-[0.3em] text-white/45 uppercase sm:block">
+              Command Center
+            </div>
+          </div>
+        </Link>
 
-        return (
+        <nav className="hidden items-center gap-1 lg:flex">
+          {navItems.map(item => (
+            <Link
+              key={item.label}
+              href={resolveHref(pathname, item.href)}
+              className="rounded-full px-3 py-2 text-sm text-white/70 transition hover:bg-white/5 hover:text-white"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          <Button variant="outline" asChild className="rounded-full px-5">
+            <Link href="/blogs">
+              <Newspaper className="mr-2 h-4 w-4" />
+              Blogs
+            </Link>
+          </Button>
+
+          {session ? (
+            <>
+              <Button
+                asChild
+                className="border-neon-blue/40 bg-neon-blue rounded-full border px-5 text-black shadow-[0_0_28px_rgba(0,217,255,0.28)] hover:bg-cyan-400 hover:shadow-[0_0_34px_rgba(0,217,255,0.36)]"
+              >
+                <Link href="/admin">
+                  <LayoutDashboard className="mr-2 h-4 w-4" />
+                  Dashboard
+                </Link>
+              </Button>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="hover:border-neon-blue/40 rounded-full border border-white/10 transition">
+                    <Avatar className="h-10 w-10">
+                      <AvatarFallback className="text-neon-blue bg-black text-sm">
+                        AD
+                      </AvatarFallback>
+                    </Avatar>
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  className="w-64 rounded-2xl border-white/10 bg-black/95 p-3 text-white"
+                  align="end"
+                >
+                  <div className="px-2 py-1.5">
+                    <p className="text-sm font-semibold text-white">Admin Session</p>
+                    <p className="text-xs text-white/60">{session.email}</p>
+                  </div>
+                  <DropdownMenuSeparator className="bg-white/10" />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem
+                      asChild
+                      className="cursor-pointer py-2.5 focus:bg-white/10 focus:text-white"
+                    >
+                      <Link href="/admin">
+                        <LayoutDashboard className="mr-2 h-4 w-4" />
+                        Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator className="bg-white/10" />
+                  <DropdownMenuGroup>
+                    <div className="px-2 py-2">
+                      <p className="mb-2 text-xs tracking-[0.25em] text-white/45 uppercase">
+                        Theme
+                      </p>
+                      <div className="flex rounded-full border border-white/10 bg-white/5 p-1">
+                        {mounted
+                          ? themes.map(({ key, icon: Icon, label }) => {
+                              const active = theme === key;
+
+                              return (
+                                <button
+                                  key={key}
+                                  type="button"
+                                  aria-label={label}
+                                  onClick={() => setTheme(key)}
+                                  className={cn(
+                                    'flex flex-1 items-center justify-center rounded-full px-3 py-1.5 text-xs transition',
+                                    active
+                                      ? 'bg-white text-black'
+                                      : 'text-white/65 hover:text-white'
+                                  )}
+                                >
+                                  <Icon className="h-3.5 w-3.5" />
+                                </button>
+                              );
+                            })
+                          : null}
+                      </div>
+                    </div>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator className="bg-white/10" />
+                  <DropdownMenuItem
+                    className="cursor-pointer justify-between py-2.5 text-red-300 focus:bg-red-500/10 focus:text-red-200"
+                    onClick={handleLogout}
+                    disabled={loggingOut}
+                  >
+                    {loggingOut ? 'Signing out...' : 'Logout'}
+                    <LogOut className="ml-2 h-4 w-4" />
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          ) : (
+            <div className="relative" ref={desktopAdminPanelRef}>
+              <Button
+                className="border-neon-blue/60 ring-neon-blue/30 rounded-full border bg-[linear-gradient(135deg,#00d9ff,#7df9ff)] px-5 py-2.5 text-black shadow-[0_0_34px_rgba(0,217,255,0.34)] ring-1 hover:shadow-[0_0_44px_rgba(0,217,255,0.42)] hover:brightness-[1.03]"
+                onClick={() => setAdminPanelOpen(current => !current)}
+              >
+                <span className="inline-flex h-2.5 w-2.5 rounded-full bg-black/70" />
+                <Shield className="h-4 w-4" />
+                <span>Admin Login</span>
+                <span className="rounded-full bg-black/10 px-2 py-1 text-[10px] font-bold tracking-[0.24em] uppercase">
+                  CMS
+                </span>
+              </Button>
+
+              {adminPanelOpen ? (
+                <div className="absolute top-[calc(100%+0.75rem)] right-0 z-50">
+                  <AdminQuickLoginPanel onClose={() => setAdminPanelOpen(false)} />
+                </div>
+              ) : null}
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2 lg:hidden">
+          {session ? (
+            <Link
+              href="/admin"
+              className="bg-neon-blue inline-flex items-center rounded-xl px-3 py-2 text-xs font-semibold tracking-[0.2em] text-black uppercase shadow-[0_0_22px_rgba(0,217,255,0.24)]"
+            >
+              Dashboard
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setAdminPanelOpen(current => !current)}
+              className="border-neon-blue/50 ring-neon-blue/20 inline-flex items-center gap-2 rounded-xl border bg-[linear-gradient(135deg,#00d9ff,#7df9ff)] px-3.5 py-2.5 text-[11px] font-bold tracking-[0.24em] text-black uppercase shadow-[0_0_26px_rgba(0,217,255,0.28)] ring-1"
+            >
+              <span className="h-2 w-2 rounded-full bg-black/70" />
+              <Shield className="h-3.5 w-3.5" />
+              Admin Login
+            </button>
+          )}
+
           <button
-            aria-label={label}
-            className="relative h-5 w-6 rounded-full"
-            key={key}
-            onClick={() => handleThemeClick(key as "light" | "dark" | "system")}
             type="button"
+            className="inline-flex items-center justify-center rounded-xl border border-white/10 p-2 text-white"
+            onClick={() => setMobileOpen(current => !current)}
+            aria-label="Toggle menu"
           >
-            {isActive && (
-              <div className="absolute inset-0 rounded-full bg-secondary" />
-            )}
-            <Icon
-              className={cn(
-                "relative z-10 m-auto h-3.5 w-3.5",
-                isActive ? "text-foreground" : "text-muted-foreground"
-              )}
-            />
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
-        );
-      })}
-    </div>
+        </div>
+      </div>
+
+      {!session && adminPanelOpen ? (
+        <div className="border-t border-white/10 bg-black/40 px-4 py-4 lg:hidden">
+          <div className="mx-auto flex max-w-7xl justify-end" ref={mobileAdminPanelRef}>
+            <AdminQuickLoginPanel onClose={() => setAdminPanelOpen(false)} />
+          </div>
+        </div>
+      ) : null}
+
+      {mobileOpen ? (
+        <div className="border-t border-white/10 bg-black/95 px-4 py-4 lg:hidden">
+          <div className="flex flex-col gap-2">
+            {navItems.map(item => (
+              <Link
+                key={item.label}
+                href={resolveHref(pathname, item.href)}
+                className="rounded-xl px-3 py-3 text-sm text-white/75 transition hover:bg-white/5 hover:text-white"
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            {session ? (
+              <>
+                <Link
+                  href="/admin"
+                  className="bg-neon-blue mt-2 rounded-xl px-3 py-3 text-sm font-semibold tracking-[0.2em] text-black uppercase"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                <button
+                  type="button"
+                  className="rounded-xl border border-red-500/30 px-3 py-3 text-left text-sm text-red-200"
+                  onClick={() => {
+                    setMobileOpen(false);
+                    void handleLogout();
+                  }}
+                >
+                  {loggingOut ? 'Signing out...' : 'Logout'}
+                </button>
+              </>
+            ) : (
+              <button
+                type="button"
+                className="bg-neon-blue mt-2 rounded-xl px-3 py-3 text-left text-sm font-semibold tracking-[0.2em] text-black uppercase"
+                onClick={() => {
+                  setMobileOpen(false);
+                  setAdminPanelOpen(true);
+                }}
+              >
+                Admin Login
+              </button>
+            )}
+          </div>
+        </div>
+      ) : null}
+    </header>
   );
-};
+}

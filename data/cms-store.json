@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-06T19:57:47.248Z",
+  "testimonials": [
+    {
+      "id": "testimonial_01",
+      "name": "Briana Patton",
+      "role": "Operations Manager",
+      "image": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=120&h=120&fit=crop&crop=face",
+      "content": "SmartCity AI unified our operations, finance planning, and infrastructure monitoring into one command layer. Teams that used to work in silos now make decisions together in minutes.",
+      "rating": 5,
+      "status": "published",
+      "featured": true,
+      "createdAt": "2026-03-12T08:00:00.000Z",
+      "updatedAt": "2026-03-12T08:00:00.000Z"
+    },
+    {
+      "id": "testimonial_02",
+      "name": "Bilal Ahmed",
+      "role": "IT Manager",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face",
+      "content": "The platform integrated with our existing sensor network in weeks, not months. We finally have a dashboard that city leadership, operations, and IT can all trust.",
+      "rating": 5,
+      "status": "published",
+      "featured": false,
+      "createdAt": "2026-03-09T10:15:00.000Z",
+      "updatedAt": "2026-03-09T10:15:00.000Z"
+    },
+    {
+      "id": "testimonial_03",
+      "name": "Saman Malik",
+      "role": "Customer Support Lead",
+      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop&crop=face",
+      "content": "Response teams can see incoming citizen issues, traffic impact, and utility alerts from one place. That visibility alone cut our escalation delays dramatically.",
+      "rating": 4,
+      "status": "published",
+      "featured": false,
+      "createdAt": "2026-03-01T11:20:00.000Z",
+      "updatedAt": "2026-03-01T11:20:00.000Z"
+    },
+    {
+      "id": "testimonial_04",
+      "name": "Omar Raza",
+      "role": "Chief Innovation Officer",
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face",
+      "content": "What impressed us most was how quickly the predictive insights translated into action. We moved from retrospective reports to proactive city operations almost immediately.",
+      "rating": 5,
+      "status": "published",
+      "featured": true,
+      "createdAt": "2026-02-24T14:10:00.000Z",
+      "updatedAt": "2026-02-24T14:10:00.000Z"
+    },
+    {
+      "id": "testimonial_05",
+      "name": "Zainab Hussain",
+      "role": "Project Manager",
+      "image": "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=120&h=120&fit=crop&crop=face",
+      "content": "The rollout felt carefully designed for a government environment. Clear workflows, dependable reporting, and a platform our teams adopted without weeks of retraining.",
+      "rating": 4,
+      "status": "draft",
+      "featured": false,
+      "createdAt": "2026-03-17T09:30:00.000Z",
+      "updatedAt": "2026-03-17T09:30:00.000Z"
+    },
+    {
+      "id": "testimonial_06",
+      "name": "Farhan Siddiqui",
+      "role": "Urban Mobility Director",
+      "image": "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=120&h=120&fit=crop&crop=face",
+      "content": "Traffic, public transit, and incident signals now update in one rhythm. That coordination helped our team reduce congestion during peak hours within the first month.",
+      "rating": 5,
+      "status": "published",
+      "featured": false,
+      "createdAt": "2026-03-22T12:00:00.000Z",
+      "updatedAt": "2026-03-22T12:00:00.000Z"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "blog_01",
+      "title": "How Predictive Traffic Intelligence Cuts Downtown Congestion",
+      "slug": "how-predictive-traffic-intelligence-cuts-downtown-congestion",
+      "content": "Smart mobility teams need more than live maps. They need context about what is likely to happen next.\n\nOur latest deployments combine traffic camera feeds, sensor telemetry, and historical commute patterns to surface congestion risks before they cascade. With the right forecasting loop, operators can rebalance corridors, adjust signal timing, and alert citizens before a bottleneck forms.\n\nThe result is a calmer operational posture and a better commuter experience. Cities are moving from reacting to traffic incidents to orchestrating the flow of movement in real time.",
+      "tags": [
+        "Traffic",
+        "AI",
+        "Mobility"
+      ],
+      "coverImage": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&h=800&fit=crop",
+      "status": "published",
+      "publishedAt": "2026-04-02T09:00:00.000Z",
+      "createdAt": "2026-04-01T12:00:00.000Z",
+      "updatedAt": "2026-04-02T09:00:00.000Z"
+    },
+    {
+      "id": "blog_02",
+      "title": "Building a Unified Command Center for Utilities and Public Safety",
+      "slug": "building-a-unified-command-center-for-utilities-and-public-safety",
+      "content": "City platforms fail when each department sees a different version of reality.\n\nA unified command center changes that by translating complex infrastructure data into a shared operational picture. Utilities teams can see the service impact of incidents, while emergency teams can understand route, crowd, and environmental constraints without opening six different systems.\n\nWhen data is coordinated across departments, response quality improves and leaders can make decisions with confidence instead of approximation.",
+      "tags": [
+        "Utilities",
+        "Public Safety",
+        "Operations"
+      ],
+      "coverImage": "https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200&h=800&fit=crop",
+      "status": "published",
+      "publishedAt": "2026-03-25T08:30:00.000Z",
+      "createdAt": "2026-03-24T16:00:00.000Z",
+      "updatedAt": "2026-04-06T18:57:55.393Z"
+    }
+  ],
+  "pricingPlans": [
+    {
+      "id": "plan_01",
+      "name": "City Starter",
+      "price": 799,
+      "billingCycle": "month",
+      "description": "A fast on-ramp for focused pilots and departmental launches.",
+      "features": [
+        "Real-time city operations dashboard",
+        "Two data source integrations",
+        "Role-based workspace access",
+        "Email support and onboarding"
+      ],
+      "highlight": false,
+      "status": "active",
+      "ctaLabel": "Launch Pilot",
+      "position": 1,
+      "createdAt": "2026-03-18T08:00:00.000Z",
+      "updatedAt": "2026-03-18T08:00:00.000Z"
+    },
+    {
+      "id": "plan_02",
+      "name": "Command Center",
+      "price": 1499,
+      "billingCycle": "month",
+      "description": "Built for cross-department coordination and live city monitoring.",
+      "features": [
+        "Unlimited operational dashboards",
+        "Predictive AI alerting",
+        "Department-level admin controls",
+        "Priority support and quarterly reviews"
+      ],
+      "highlight": true,
+      "status": "active",
+      "ctaLabel": "Get Started",
+      "position": 2,
+      "createdAt": "2026-03-18T08:05:00.000Z",
+      "updatedAt": "2026-03-18T08:05:00.000Z"
+    },
+    {
+      "id": "plan_03",
+      "name": "National Scale",
+      "price": 2499,
+      "billingCycle": "month",
+      "description": "For large smart-city programs with high-volume data and governance needs.",
+      "features": [
+        "Multi-city deployment support",
+        "Advanced audit and approval workflows",
+        "Custom reporting and executive summaries",
+        "Dedicated success engineering"
+      ],
+      "highlight": false,
+      "status": "active",
+      "ctaLabel": "Talk to Sales",
+      "position": 3,
+      "createdAt": "2026-03-18T08:10:00.000Z",
+      "updatedAt": "2026-03-18T08:10:00.000Z"
+    },
+    {
+      "id": "plan_8e1393b7-cd97-4c8c-8e70-9ae624d35947",
+      "name": "smart ai assistant",
+      "price": 199,
+      "billingCycle": "month",
+      "description": "hiii im a chat bot",
+      "features": [
+        "hii"
+      ],
+      "highlight": true,
+      "status": "active",
+      "ctaLabel": "Get Started",
+      "position": 1,
+      "createdAt": "2026-04-06T19:57:47.234Z",
+      "updatedAt": "2026-04-06T19:57:47.234Z"
+    }
+  ],
+  "contactSubmissions": [
+    {
+      "id": "contact_01",
+      "name": "Ava Rodriguez",
+      "email": "ava.rodriguez@metro.gov",
+      "organization": "Metro Operations Department",
+      "message": "We are evaluating a command-center rollout for traffic and incident response. Could your team share implementation timelines for a mid-sized city?",
+      "status": "new",
+      "createdAt": "2026-04-05T10:20:00.000Z",
+      "updatedAt": "2026-04-05T10:20:00.000Z"
+    },
+    {
+      "id": "contact_02",
+      "name": "Marcus Lee",
+      "email": "marcus.lee@civicgrid.org",
+      "organization": "Civic Grid Initiative",
+      "message": "Interested in pricing for a multi-department proof of concept focused on utilities, transit, and environmental monitoring.",
+      "status": "resolved",
+      "createdAt": "2026-04-04T07:45:00.000Z",
+      "updatedAt": "2026-04-05T08:10:00.000Z"
+    }
+  ]
+}

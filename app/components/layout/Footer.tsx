@@ -1,88 +1,79 @@
+﻿import Link from "next/link";
+
 export default function Footer() {
   return (
-    <footer className="bg-background-secondary border-t border-white/10 py-12">
+    <footer className="border-t border-white/10 bg-background-secondary py-12">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Logo */}
-          <div className="col-span-1 md:col-span-1">
-            <div className="text-2xl font-bold gradient-text mb-4">
-              SmartCity AI
-            </div>
-            <p className="text-gray-400 text-sm">
-              Transforming urban infrastructure with AI-powered insights and real-time analytics.
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+          <div>
+            <div className="mb-4 text-2xl font-bold text-white">SmartCity AI</div>
+            <p className="text-sm text-gray-400">
+              Transforming urban infrastructure with AI-powered insights, live operations data, and coordinated city workflows.
             </p>
           </div>
 
-          {/* Product */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Product</h3>
+            <h3 className="mb-4 font-semibold text-white">Platform</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#features" className="text-gray-400 hover:text-neon-blue transition-colors">
+                <a href="#features" className="text-gray-400 transition-colors hover:text-neon-blue">
                   Features
                 </a>
               </li>
               <li>
-                <a href="#dashboard" className="text-gray-400 hover:text-neon-blue transition-colors">
-                  Dashboard
+                <a href="#technology" className="text-gray-400 transition-colors hover:text-neon-blue">
+                  Technology
                 </a>
               </li>
               <li>
-                <a href="#technology" className="text-gray-400 hover:text-neon-blue transition-colors">
-                  Technology
+                <a href="#pricing" className="text-gray-400 transition-colors hover:text-neon-blue">
+                  Pricing
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Company */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Company</h3>
+            <h3 className="mb-4 font-semibold text-white">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#about" className="text-gray-400 hover:text-neon-blue transition-colors">
-                  About
+                <Link href="/blogs" className="text-gray-400 transition-colors hover:text-neon-blue">
+                  Blogs
+                </Link>
+              </li>
+              <li>
+                <a href="#testimonials" className="text-gray-400 transition-colors hover:text-neon-blue">
+                  Testimonials
                 </a>
               </li>
               <li>
-                <a href="#careers" className="text-gray-400 hover:text-neon-blue transition-colors">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="text-gray-400 hover:text-neon-blue transition-colors">
+                <a href="#contact" className="text-gray-400 transition-colors hover:text-neon-blue">
                   Contact
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Legal */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Legal</h3>
+            <h3 className="mb-4 font-semibold text-white">Admin</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#privacy" className="text-gray-400 hover:text-neon-blue transition-colors">
-                  Privacy Policy
-                </a>
+                <Link href="/admin/login" className="text-gray-400 transition-colors hover:text-neon-blue">
+                  Admin Login
+                </Link>
               </li>
               <li>
-                <a href="#terms" className="text-gray-400 hover:text-neon-blue transition-colors">
-                  Terms of Service
-                </a>
-              </li>
-              <li>
-                <a href="#security" className="text-gray-400 hover:text-neon-blue transition-colors">
-                  Security
-                </a>
+                <Link href="/admin" className="text-gray-400 transition-colors hover:text-neon-blue">
+                  Dashboard
+                </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-8 pt-8 text-center">
-          <p className="text-gray-400 text-sm">
-            © 2026 SmartCity AI. All rights reserved. Made with ❤️ by Group 3 (The OG team - Abhiral, Anunay and Rishi) - EvolVIT Team. 😊
+        <div className="mt-8 border-t border-white/10 pt-8 text-center">
+          <p className="text-sm text-gray-400">
+            © 2026 SmartCity AI. All rights reserved.
           </p>
         </div>
       </div>
